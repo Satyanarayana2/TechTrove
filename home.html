@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TechTrove Reveal</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Annie+Use+Your+Telescope&display=swap');
+
+    :root {
+      --font-primary: #4A90E2; /* Main headline font */
+      --font-secondary: #ffffff; /* Subheadline / subtext font */
+      --font-accent: #0086ff; /* Button links or hover color */
+      --font-highlight: #ff5e57; /* Optional for excitement words */
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #0d1117 url('background1 (2).jpg') center/cover no-repeat;
+      color: #e6e6e6;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .container {
+      font-family: 'Berkshire Swash';
+      display: flex;
+      align-items: center;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .word {
+      font-size: 4rem;
+      font-weight: 800;
+      transition: transform 0.5s ease;
+      z-index: 2;
+    }
+
+    .life {
+      margin-right: 10px;
+    }
+
+    .two {
+      margin-left: 10px;
+    }
+
+    
+    .popup-img {
+      display: none;
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 12px;
+      /* box-shadow: 0 0 20px rgba(0,0,0,0.6); */
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      transition: opacity 0.5s ease;
+    }
+
+    .container:hover .life {
+      transform: translateX(-45px);
+    }
+
+    .container:hover .two {
+      transform: translateX(205px);
+    }
+
+    .container:hover .popup-img {
+      display: block;
+      opacity: 1;
+    }
+
+    .subtext {
+      font-family: Annie Use Your Telescope;
+      font-weight: SemiBold;
+      margin-top: 2rem;
+      font-size: 4rem;
+      transition: transform 0.5s ease, opacity 0.3s ease;
+      z-index: 2;
+    }
+
+    .container:hover ~ .subtext {
+      transform: translateY(100px);
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" onclick="index.html">
+    <span class="word life" style="color: var(--font-primary); opacity: 80%;">Know What( </span>
+    <span class="word"> </span>
+    <span class="word two" style="color: var(--font-primary); opacity: 80%"> )Actually Matters !</span>
+    <img class="popup-img" src="techtrove logo.PNG" alt="Popup Image" onclick="window.location.href='index.html'">
+  </div>
+  <div class="subtext" style="color: var(--font-secondary);">No hype Just Insight..</div>
+</body>
+</html>
