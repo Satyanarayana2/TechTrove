@@ -1,0 +1,30 @@
+/* Hero Section */
+.hero {
+    background-image: url('content\ resources/background.png');
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0;
+    text-align: center;
+    color: white;
+    position: relative;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero h2 {
+    color: #EAEAEA;
+    font-size: 60px;
+    margin-bottom: 20px;
+    position: relative;
+    padding: 20px;
+}
+
+.hero p {
+    color: #EAEAEA;
+    font-size: 20px;
+    position: relative;
+    padding: 20px;
+} 

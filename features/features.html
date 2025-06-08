@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gadgets Spec Breakdown</title>
+    <link rel="stylesheet" href="features.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/fontawesome.min.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1><i class="fas fa-treasure-chest"></i> TechTrove</h1>
+                <p>Your Treasure Trove of Tech Knowledge</p>
+            </div>
+            <ul class="nav-links">
+                <li><a href="home.html" target="_self">Home</a></li>
+                <li><a href="recommendation/recommendation.html" target="_self">Recommendation</a></li>
+                <!-- <li><a href="features/features.html" target="_self">Tech Explained</a></li> -->
+                <li><a href="technews/technews.html" target="_blank">Tech News</a></li>
+                <li><a href="https://pricehistory.app/" target="_blank">Live Price</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="hero">
+        <h1>Gadgets Spec Breakdown</h1>
+        <p>Unravel the mysteries of your devices. Understand what makes them tick!</p>
+    </div>
+
+    <div class="devices">
+        <div class="grid">
+            <div class="grid-item" data-section="smartphones-tablets">
+                <img src="images/smartphone&tablet.png" alt="Smartphones & Tablets">
+                <h3>Smartphones & Tablets</h3>
+                <p>Dive into processors, cameras, displays, and find your perfect device.</p>
+            </div>
+            <div class="grid-item" data-section="laptops">
+                <img src="images/laptop.png" alt="Laptops">
+                <h3>Laptops</h3>
+                <p>Dive into CPU, GPU, RAM, display types, and find your ideal machine.</p>
+            </div>
+            <div class="grid-item" data-section="audio-devices">
+                <img src="images/audiodevice.png" alt="Audio Devices">
+                <h3>Audio Devices</h3>
+                <p>Understand drivers, codecs, battery life — make your music sound better.</p>
+            </div>
+            <div class="grid-item" data-section="other-gadgets">
+                <img src="images/other.png" alt="Other Gadgets">
+                <h3>Other Gadgets</h3>
+                <p>From smartwatches to accessories, uncover what really matters inside.</p>
+            </div>
+        </div>
+    </div>
+
+    <section id="smartphones-tablets" class="smartphones-tablets">
+        <h2>Smartphones & Tablets</h2>
+        <p>Explore processors, displays, cameras, and everything that powers your daily life.</p>
+        <ul class="spec-list">
+            <li class="spec-item" data-target="soc">
+                <strong>Processor</strong> The processor dashes through instructions at lightning speed, solving computational puzzles on the fly like an elite sprinter maneuvering through obstacles with precision. Every piece of data falls perfectly into place without hesitation.
+                <div class="spec-detail" id="soc">
+                    <h3><strong>Inside the Machine: </strong>Unpacking Your Device's Power</h3>
+                    <h4>System on Chip (SoC): What You Need to Know</h4>
+                    <p>The Central Processing Unit (CPU) serves as the core computational hub, executing software instructions and managing tasks efficiently. 
+                    Modern CPUs incorporate multiple cores, caches, and specialized accelerators like Neural Processing Units (NPUs) to enhance performance.</p>
+    
+                    <h4>More Cores, More Power? Unpacking the Processor Structure</h4>
+                    <p>A CPU core is an individual processing unit within a smartphone's processor. It handles tasks by executing instructions, allowing the device to run apps, 
+                    process data, and perform complex operations efficiently. Modern smartphones use multi-core processors to enhance performance and battery efficiency, 
+                    enabling them to handle multiple tasks simultaneously.</p>
+    
+                    <h4>Core Architecture: What Defines Performance?</h4>
+                    <ul>
+                        <li><strong>Dual-Core</strong> Basic multitasking (web browsing, emails).</li>
+                        <li><strong>Quad-Core</strong> Handles gaming and moderate computing.</li>
+                        <li><strong>Hexa-Core & Octa-Core</strong> Optimized for high-end applications.</li>
+                        <li><strong>10+ Cores</strong> Found in workstations and AI-driven chipsets.</li>
+                    </ul>
+    
+                    <h4>Why Does the Same Chipset Have Different Core Counts?</h4>
+                    <ul>
+                        <li><strong>Binning Process</strong> Some cores may be disabled due to defects during manufacturing.</li>
+                        <li><strong>Market Segmentation</strong> Same chip can have multiple versions (e.g., Snapdragon 8 Gen 3 Lite vs. Pro).</li>
+                        <li><strong>Power & Efficiency Needs</strong> Fewer cores can mean lower heat output, ideal for smartphones.</li>
+                    </ul>
+    
+                    <h4>Heterogeneous Core Design in Processors</h4>
+                    <ul>
+                        <li><strong>Performance Cores (P-Cores)</strong> Speed-focused cores for gaming, rendering.</li>
+                        <li><strong>Efficiency Cores (E-Cores)</strong> Power-saving cores for background tasks.</li>
+                        <li><strong>big.LITTLE Architecture</strong> ARM's approach to balancing high-performance cores with efficient cores, commonly found in smartphones.</li>
+                    </ul>
+    
+                    <h4>Essential Processor Specifications to Know</h4>
+                    <ul>
+                        <li><strong>Clock Speed (GHz)</strong> Higher speed = faster execution, but generates more heat.</li>
+                        <li><strong>Cache Memory</strong> Quick access storage (L1/L2/L3 cache) enhances efficiency.</li>
+                        <li><strong>Threads vs. Cores</strong> Threads are virtual cores, increasing workload distribution.</li>
+                        <li><strong>Thermal Design Power (TDP)</strong> Determines power usage and cooling needs.</li>
+                        <li><strong>Neural Processing Unit (NPU)</strong> AI-specialized cores for image recognition and machine learning tasks.</li>
+                        <li><strong>Fabrication Process (Nanometer Scale)</strong> Smaller nm (e.g., 3nm vs. 7nm) = better efficiency and more transistors packed in a chip.</li>
+                    </ul>
+    
+                    <h4>Leading Processor Manufacturers</h4>
+                    <ul>
+                        <li><strong>Intel</strong> Hybrid P/E-core designs for desktops.</li>
+                        <li><strong>AMD</strong> High-performance Ryzen chips for gaming/workstations.</li>
+                        <li><strong>Qualcomm</strong> Snapdragon processors with AI-driven NPUs.</li>
+                        <li><strong>Apple</strong> M-series chips with ARM-based efficiency and integrated GPU.</li>
+                        <li><strong>MediaTek & NVIDIA</strong> Mobile processors and AI/data center solutions.</li>
+                    </ul>
+    
+                    <h4>Final Takeaways</h4>
+                    <ul>
+                        <li>More cores don't always mean better performance—balance with clock speed, software optimization, and power management.</li>
+                        <li>NPUs play a crucial role in AI-driven workloads and optimize efficiency.</li>
+                        <li>Chip manufacturers reuse architectures to cater to different budgets and device needs.</li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="spec-item" data-target="display">
+                <strong>Display</strong> Size, resolution, and technology (LCD, OLED) impact visual experience.
+                <div class="spec-detail" id="display">
+                    <h3><strong>Display Technology: </strong>Understanding the Basics</h3>
+                    <h4>Types of Displays</h4>
+                    <ul>
+                        <li><strong>LCD (Liquid Crystal Display)</strong> Uses liquid crystals and backlight good color accuracy.</li>
+                        <li><strong>OLED (Organic Light Emitting Diode)</strong> Each pixel emits its own light better contrast and colors.</li>
+                        <li><strong>AMOLED (Active Matrix OLED)</strong> Faster refresh rates, better battery efficiency.</li>
+                        <li><strong>Retina Display</strong> Apple's term for high-resolution screens with pixel density above human eye resolution.</li>
+                    </ul>
+    
+                    <h4>Key Display Specifications</h4>
+                    <ul>
+                        <li><strong>Resolution</strong> Higher resolution = sharper images (e.g., 1080p, 1440p, 4K).</li>
+                        <li><strong>Refresh Rate</strong> Higher refresh rates (60Hz, 120Hz) = smoother animations.</li>
+                        <li><strong>Brightness</strong> Measured in nits higher brightness = better visibility in sunlight.</li>
+                        <li><strong>Color Accuracy</strong> Measured in sRGB/Adobe RGB important for photography and design work.</li>
+                    </ul>
+    
+                    <h4>Final Takeaways</h4>
+                    <ul>
+                        <li>The display is a crucial part of the user experience choose based on your needs (gaming, media consumption).</li>
+                        <li>Higher resolution and refresh rates are beneficial for gaming and media consumption.</li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="spec-item" data-target="camera">
+                <strong>Camera</strong> Megapixels, aperture size, and features like OIS determine photo quality.
+                <div class="spec-detail" id="camera">
+                    <h3><strong>Camera Technology: </strong>Understanding the Basics</h3>
+                    <h4>Types of Camera sensors</h4>
+                    <ul>
+                        <li><strong>Wide Angle</strong> Standard lens for most photography.</li>
+                        <li><strong>Telephoto</strong> Zoom lens for distant subjects.</li>
+                        <li><strong>Ultra-Wide</strong> Captures more in the frame great for landscapes.</li>
+                        <li><strong>Macro</strong> Close-up photography captures fine details.</li>
+                    </ul>
+    
+                    <h4>Key Camera Specifications</h4>
+                    <ul>
+                        <li><strong>Megapixels</strong> Higher megapixels = more detail, but not the only factor.</li>
+                        <li><strong>Aperture Size (f-stop)</strong> Lower f-stop = better low-light performance.</li>
+                        <li><strong>Optical Image Stabilization (OIS)</strong> Reduces blurriness from shaky hands.</li>
+                        <li><strong>HDR (High Dynamic Range)</strong> Captures more detail in highlights and shadows.</li>
+                        <li><strong>Video Resolution</strong> Higher resolution (4K, 8K) = better video quality.</li>
+                        <li><strong>Frame Rate</strong> Higher frame rates (60fps, 120fps) = smoother video.</li>
+                        <li><strong>AI Features</strong> AI enhancements for better photos (e.g., night mode, portrait mode).</li>
+                    </ul>
+    
+                    <h4>Final Takeaways</h4>
+                    <ul>
+                        <li>The camera is a crucial part of the smartphone experience choose based on your needs (photography, videography).</li>
+                        <li>Megapixels are important, but other factors like aperture size and OIS matter too.</li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="spec-item" data-target="battery">
+                <strong>Battery</strong> Battery Capacity (mAh) and charging speed affect usage time and convenience.
+                <div class="spec-detail" id="battery">
+                    <h3><strong>Battery Technology: </strong>Understanding the Basics</h3>
+                    <h4>Types of Batteries</h4>
+                    <ul>
+                        <li><strong>Lithium-Ion</strong> Common in smartphones good energy density.</li>
+                        <li><strong>Lithium-Polymer</strong> Flexible design used in thin devices.</li>
+                    </ul>
+    
+                    <h4>Key Battery Specifications</h4>
+                    <ul>
+                        <li><strong>Capacity (mAh)</strong> Higher capacity = longer usage time.</li>
+                        <li><strong>Charging Speed</strong> Fast charging (e.g., 18W, 30W) reduces downtime.</li>
+                        <li><strong>Battery Life</strong> Measured in hours depends on usage and optimization.</li>
+                    </ul>
+    
+                    <h4>Final Takeaways</h4>
+                    <ul>
+                        <li>The battery is a crucial part of the smartphone experience choose based on your needs (gaming, media consumption).</li>
+                        <li>Higher capacity and fast charging are beneficial for heavy users.</li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="spec-item" data-target="audio">
+                <strong>Audio</strong> Speaker quality, headphone jack, and audio codecs affect sound experience.
+                <div class="spec-detail" id="audio">
+                    <h3><strong>Audio Technology: </strong>Understanding the Basics</h3>
+                    <h4>Types of Audio Technology</h4>
+                    <ul>
+                        <li><strong>Speakers</strong> Quality and placement affect sound experience.</li>
+                        <li><strong>Headphone Jack</strong> 3.5mm jack vs. USB-C affects compatibility.</li>
+                        <li><strong>Audio Codecs</strong> Compression algorithms that affect audio quality (e.g., aptX, LDAC).</li>
+                    </ul>
+    
+                    <h4>Key Audio Specifications</h4>
+                    <ul>
+                        <li><strong>Speaker Quality</strong> Higher quality = better sound experience.</li>
+                        <li><strong>Audio Codecs</strong> Higher quality codecs = better sound quality.</li>
+                    </ul>
+    
+                    <h4>Final Takeaways</h4>
+                    <ul>
+                        <li>The audio experience is a crucial part of the smartphone experience choose based on your needs (music, gaming).</li>
+                        <li>Higher quality speakers and audio codecs are beneficial for heavy users.</li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="spec-item" data-target="storage">
+                <strong>Storage</strong> Internal storage options (eMMC, UFS) and expandability (microSD).
+                <div class="spec-detail" id="storage">
+                    <h3><strong>Storage Technology: </strong>Understanding the Basics</h3>
+                    <h4>Types of Storage</h4>
+                    <ul>
+                        <li><strong>eMMC (Embedded MultiMediaCard)</strong> Basic storage slower than UFS.</li>
+                        <li><strong>UFS (Universal Flash Storage)</strong> Faster and more efficient used in high-end devices.</li>
+                        <li><strong>microSD</strong> Expandable storage not all devices support it.</li>
+                    </ul>
+    
+                    <h4>Key Storage Specifications</h4>
+                    <ul>
+                        <li><strong>Capacity</strong> Higher capacity = more apps, photos, and videos.</li>
+                        <li><strong>Read/Write Speed</strong> Faster speeds = quicker app loading and file transfers.</li>
+                    </ul>
+    
+                    <h4>Final Takeaways</h4>
+                    <ul>
+                        <li>The storage is a crucial part of the smartphone experience choose based on your needs (gaming, media consumption).</li>
+                        <li>Higher capacity and faster speeds are beneficial for heavy users.</li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="spec-item" data-target="os">
+                <strong>Operating System</strong> iOS vs Android affects app availability and user experience.
+                <div class="spec-detail" id="os">
+                    <h3><strong>Operating System: </strong>Understanding the Basics</h3>
+                    <h4>Types of Operating Systems</h4>
+                    <ul>
+                        <li><strong>iOS</strong> Apple's operating system closed ecosystem.</li>
+                        <li><strong>Android</strong> Google's operating system open-source and customizable.</li>
+                    </ul>
+
+                    <h4>Key Operating System Features</h4>
+                    <ul>
+                        <li><strong>User Interface</strong> Different design philosophies choose based on preference.</li>
+                        <li><strong>App Availability</strong> iOS has more exclusive apps Android has more customization options.</li>
+                        <li><strong>Updates</strong> iOS devices receive updates for longer periods.</li>
+                    </ul>
+
+                    <h4>Final Takeaways</h4>
+                    <ul>
+                        <li>The operating system is a crucial part of the smartphone experience choose based on your needs (gaming, media consumption).</li>
+                        <li>iOS is more user-friendly, while Android offers more customization options.</li>
+                    </ul>
+                </div>
+            </li>
+            <li class="spec-item" data-target="connectivity">
+                <strong>Connectivity</strong> 5G, Wi-Fi standards, and Bluetooth versions affect speed and compatibility.
+                <div class="spec-detail" id="connectivity">
+                    <h3><strong>Connectivity Technology: </strong>Understanding the Basics</h3>
+                    <h4>Types of Connectivity</h4>
+                    <ul>
+                        <li><strong>5G</strong> The latest mobile network technology faster speeds and lower latency.</li>
+                        <li><strong>Wi-Fi Standards</strong> Different standards (e.g., Wi-Fi 5, Wi-Fi 6) affect speed and range.</li>
+                        <li><strong>Bluetooth</strong> Wireless technology for short-range communication versions affect range and speed.</li>
+                    </ul>
+                    <h4>Key Connectivity Specifications</h4>
+                    <ul>
+                        <li><strong>Speed</strong> Higher speeds improve streaming and downloads.</li>
+                        <li><strong>Compatibility</strong> Ensure devices support the same standards for optimal performance.</li>
+                    </ul>
+                    <h4>Final Takeaways</h4>
+                    <ul>
+                        <li>Connectivity is essential for a seamless experience choose based on your needs (streaming, gaming).</li>
+                        <li>5G and the latest Wi-Fi standards provide significant advantages for heavy users.</li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </section>
+
+    <section id="laptops" class="laptops">
+        <h2>Laptops</h2>
+        <p>Dive into CPU, GPU, RAM, display types, and find your ideal machine.</p>
+        <ul class="spec-list">
+            <li class="spec-item" data-target="laptop-cpu">
+                <strong>CPU (Central Processing Unit)</strong> The brain of your laptop, handling all computational tasks and determining overall performance.
+                <div class="spec-detail" id="laptop-cpu">
+                    <h3><strong>CPU Architecture: </strong>Understanding the Core Components</h3>
+                    <h4>Types of Laptop CPUs</h4>
+                    <ul>
+                        <li><strong>Intel Core Series</strong> i3 (entry), i5 (mid-range), i7 (high-end), i9 (premium).</li>
+                        <li><strong>AMD Ryzen Series</strong> 3 (entry), 5 (mid-range), 7 (high-end), 9 (premium).</li>
+                        <li><strong>Apple Silicon</strong> M1, M2, M3 series with unified architecture.</li>
+                    </ul>
+
+                    <h4>Key CPU Specifications</h4>
+                    <ul>
+                        <li><strong>Core Count</strong> More cores = better multitasking (2-16 cores common).</li>
+                        <li><strong>Thread Count</strong> Virtual cores for parallel processing.</li>
+                        <li><strong>Clock Speed</strong> Measured in GHz, higher = faster processing.</li>
+                        <li><strong>Cache Memory</strong> L1/L2/L3 cache for quick data access.</li>
+                        <li><strong>Thermal Design Power (TDP)</strong> Power consumption and heat generation.</li>
+                    </ul>
+
+                    <h4>Performance vs. Efficiency</h4>
+                    <ul>
+                        <li><strong>Performance Cores</strong> High-power cores for demanding tasks.</li>
+                        <li><strong>Efficiency Cores</strong> Power-saving cores for background tasks.</li>
+                        <li><strong>Hybrid Architecture</strong> Intel's P/E-core design for optimal performance.</li>
+                    </ul>
+
+                    <h4>Final Takeaways</h4>
+                    <ul>
+                        <li>Choose CPU based on your workload (basic tasks vs. professional work).</li>
+                        <li>Consider both performance and battery life for portable use.</li>
+                        <li>Higher core count benefits multitasking and professional applications.</li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="spec-item" data-target="laptop-gpu">
+                <strong>GPU (Graphics Processing Unit)</strong> Handles graphics rendering, gaming, and video processing.
+                <div class="spec-detail" id="laptop-gpu">
+                    <h3><strong>GPU Technology: </strong>Understanding Graphics Processing</h3>
+                    <h4>Types of GPUs</h4>
+                    <ul>
+                        <li><strong>Integrated Graphics</strong> Built into CPU, power-efficient.</li>
+                        <li><strong>Dedicated Graphics</strong> Separate GPU for better performance.</li>
+                        <li><strong>NVIDIA RTX Series</strong> High-end gaming and professional work.</li>
+                        <li><strong>AMD Radeon Series</strong> Competitive gaming and content creation.</li>
+                    </ul>
+
+                    <h4>Key GPU Specifications</h4>
+                    <ul>
+                        <li><strong>VRAM</strong> Dedicated video memory (2GB-16GB).</li>
+                        <li><strong>CUDA Cores/Stream Processors</strong> Parallel processing units.</li>
+                        <li><strong>Clock Speed</strong> GPU processing speed.</li>
+                        <li><strong>Ray Tracing</strong> Advanced lighting and reflection technology.</li>
+                    </ul>
+
+                    <h4>Final Takeaways</h4>
+                    <ul>
+                        <li>Dedicated GPU essential for gaming and professional work.</li>
+                        <li>Integrated graphics sufficient for basic tasks and battery life.</li>
+                        <li>Consider VRAM for high-resolution gaming and content creation.</li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="spec-item" data-target="laptop-ram">
+                <strong>RAM (Random Access Memory)</strong> Temporary storage for active programs and data.
+                <div class="spec-detail" id="laptop-ram">
+                    <h3><strong>RAM Technology: </strong>Understanding Memory</h3>
+                    <h4>Types of RAM</h4>
+                    <ul>
+                        <li><strong>DDR4</strong> Common in most laptops, good performance.</li>
+                        <li><strong>DDR5</strong> Newer, faster, more efficient.</li>
+                        <li><strong>LPDDR</strong> Low-power RAM for better battery life.</li>
+                    </ul>
+
+                    <h4>Key RAM Specifications</h4>
+                    <ul>
+                        <li><strong>Capacity</strong> 8GB minimum, 16GB recommended, 32GB+ for professional work.</li>
+                        <li><strong>Speed</strong> Measured in MHz, higher = faster data transfer.</li>
+                        <li><strong>Dual-Channel</strong> Two RAM sticks for better performance.</li>
+                    </ul>
+
+                    <h4>Final Takeaways</h4>
+                    <ul>
+                        <li>More RAM improves multitasking and performance.</li>
+                        <li>Consider upgradeability for future needs.</li>
+                        <li>Match RAM type with CPU compatibility.</li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </section>
+
+    <section id="audio-devices" class="audio-devices">
+        <h2>Audio Devices</h2>
+        <p>Understand drivers, codecs, battery life — make your music sound better.</p>
+        <ul class="spec-list">
+            <li class="spec-item" data-target="audio-drivers">
+                <strong>Drivers</strong> The heart of audio devices, converting electrical signals into sound.
+                <div class="spec-detail" id="audio-drivers">
+                    <h3><strong>Driver Technology: </strong>Understanding Sound Production</h3>
+                    <h4>Types of Drivers</h4>
+                    <ul>
+                        <li><strong>Dynamic Drivers</strong> Most common, good all-round performance.</li>
+                        <li><strong>Planar Magnetic</strong> High-end, detailed sound reproduction.</li>
+                        <li><strong>Electrostatic</strong> Premium, extremely accurate sound.</li>
+                        <li><strong>Balanced Armature</strong> Compact, efficient for in-ear monitors.</li>
+                    </ul>
+
+                    <h4>Key Driver Specifications</h4>
+                    <ul>
+                        <li><strong>Driver Size</strong> Larger drivers = better bass response.</li>
+                        <li><strong>Frequency Response</strong> Range of audible frequencies (20Hz-20kHz).</li>
+                        <li><strong>Impedance</strong> Electrical resistance, affects power requirements.</li>
+                        <li><strong>Sensitivity</strong> Volume output per power input.</li>
+                    </ul>
+
+                    <h4>Final Takeaways</h4>
+                    <ul>
+                        <li>Driver type affects sound signature and use case.</li>
+                        <li>Multiple drivers can provide better frequency coverage.</li>
+                        <li>Consider power requirements for optimal performance.</li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="spec-item" data-target="audio-codecs">
+                <strong>Codecs</strong> Digital audio processing and compression technology.
+                <div class="spec-detail" id="audio-codecs">
+                    <h3><strong>Codec Technology: </strong>Understanding Audio Processing</h3>
+                    <h4>Types of Codecs</h4>
+                    <ul>
+                        <li><strong>LDAC</strong> High-quality wireless audio (990kbps).</li>
+                        <li><strong>aptX HD</strong> High-resolution wireless audio.</li>
+                        <li><strong>AAC</strong> Common in Apple devices, good quality.</li>
+                        <li><strong>SBC</strong> Basic Bluetooth codec, widely compatible.</li>
+                    </ul>
+
+                    <h4>Key Codec Features</h4>
+                    <ul>
+                        <li><strong>Bitrate</strong> Higher = better audio quality.</li>
+                        <li><strong>Latency</strong> Lower = better for gaming/video.</li>
+                        <li><strong>Compression</strong> Lossless vs. lossy audio quality.</li>
+                    </ul>
+
+                    <h4>Final Takeaways</h4>
+                    <ul>
+                        <li>Codec compatibility important for wireless devices.</li>
+                        <li>Higher bitrate codecs provide better audio quality.</li>
+                        <li>Consider latency for gaming and video content.</li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </section>
+
+    <section id="other-gadgets" class="other-gadgets">
+        <h2>Other Gadgets</h2>
+        <p>From smartwatches to accessories, uncover what really matters inside.</p>
+        <ul class="spec-list">
+            <li class="spec-item" data-target="smartwatch">
+                <strong>Smartwatches</strong> Mini computers on your wrist, tracking health and keeping you connected.
+                <div class="spec-detail" id="smartwatch">
+                    <h3><strong>Smartwatch Technology: </strong>Understanding Wearable Tech</h3>
+                    <h4>Key Components</h4>
+                    <ul>
+                        <li><strong>Processor</strong> Efficient chips for long battery life.</li>
+                        <li><strong>Display</strong> OLED/AMOLED for better visibility.</li>
+                        <li><strong>Sensors</strong> Heart rate, GPS, accelerometer.</li>
+                        <li><strong>Battery</strong> 1-3 days typical life.</li>
+                    </ul>
+
+                    <h4>Health Features</h4>
+                    <ul>
+                        <li><strong>Heart Rate Monitoring</strong> Continuous tracking.</li>
+                        <li><strong>Sleep Tracking</strong> Sleep stages and quality.</li>
+                        <li><strong>Activity Tracking</strong> Steps, calories, workouts.</li>
+                        <li><strong>ECG</strong> Advanced heart monitoring.</li>
+                    </ul>
+
+                    <h4>Final Takeaways</h4>
+                    <ul>
+                        <li>Battery life crucial for daily use.</li>
+                        <li>Health features vary by model.</li>
+                        <li>Consider ecosystem compatibility.</li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="spec-item" data-target="accessories">
+                <strong>Accessories</strong> Essential add-ons that enhance your tech experience.
+                <div class="spec-detail" id="accessories">
+                    <h3><strong>Accessory Technology: </strong>Understanding Add-ons</h3>
+                    <h4>Types of Accessories</h4>
+                    <ul>
+                        <li><strong>Charging Solutions</strong> Fast charging, wireless charging.</li>
+                        <li><strong>Protection</strong> Cases, screen protectors, covers.</li>
+                        <li><strong>Connectivity</strong> Adapters, dongles, hubs.</li>
+                        <li><strong>Storage</strong> External drives, memory cards.</li>
+                    </ul>
+
+                    <h4>Key Considerations</h4>
+                    <ul>
+                        <li><strong>Compatibility</strong> Device-specific features.</li>
+                        <li><strong>Quality</strong> Durability and reliability.</li>
+                        <li><strong>Functionality</strong> Additional features and benefits.</li>
+                    </ul>
+
+                    <h4>Final Takeaways</h4>
+                    <ul>
+                        <li>Quality accessories enhance device longevity.</li>
+                        <li>Consider compatibility and use case.</li>
+                        <li>Balance cost with functionality.</li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-treasure-chest"></i> TechTrove</h3>
+                <p>Your trusted guide to tech knowledge</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#terms">Terms</a></li>
+                    <li><a href="#privacy">Privacy</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 TechTrove. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <script src="features.js"></script>
+
+</body>
+</html>
