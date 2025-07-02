@@ -15,43 +15,7 @@ function initializeCarousel() {
     const carousel = document.querySelector('.carousel');
     if (!carousel) return;
 
-    // Add more carousel items dynamically
-    const carouselItems = [
-        {
-            image: 'placeholder1.jpg',
-            title: 'iPhone 15 Pro',
-            price: 'Starting from $999'
-        },
-        {
-            image: 'placeholder2.jpg',
-            title: 'Samsung Galaxy S24',
-            price: 'Starting from $899'
-        },
-        {
-            image: 'placeholder3.jpg',
-            title: 'Google Pixel 8',
-            price: 'Starting from $799'
-        },
-        {
-            image: 'placeholder4.jpg',
-            title: 'OnePlus 12',
-            price: 'Starting from $899'
-        }
-    ];
-
-    // Populate carousel items
-    carouselItems.forEach(item => {
-        const carouselItem = document.createElement('div');
-        carouselItem.className = 'carousel-item';
-        carouselItem.innerHTML = `
-            <img src="${item.image}" alt="${item.title}">
-            <h3>${item.title}</h3>
-            <p>${item.price}</p>
-        `;
-        carousel.appendChild(carouselItem);
-    });
-
-    // Add scroll buttons
+    // Remove dynamic carousel item addition. Only add scroll buttons.
     const scrollLeft = document.createElement('button');
     const scrollRight = document.createElement('button');
     scrollLeft.className = 'carousel-scroll left';
@@ -59,8 +23,9 @@ function initializeCarousel() {
     scrollLeft.innerHTML = '<i class="fas fa-chevron-left"></i>';
     scrollRight.innerHTML = '<i class="fas fa-chevron-right"></i>';
 
-    carousel.parentElement.appendChild(scrollLeft);
-    carousel.parentElement.appendChild(scrollRight);
+    const carouselWrapper = carousel.parentElement;
+    carouselWrapper.appendChild(scrollLeft);
+    carouselWrapper.appendChild(scrollRight);
 
     // Scroll functionality
     scrollLeft.addEventListener('click', () => {
@@ -85,17 +50,17 @@ function initializeSlideshow() {
 
     const slides = [
         {
-            image: 'placeholder5.jpg',
+            image: 'content resources/Applelogo.svg',
             title: 'iPhone 16 Pro',
             description: 'Expected release: September 2024'
         },
         {
-            image: 'placeholder6.jpg',
+            image: 'content resources/samsunglogo.svg',
             title: 'Samsung Galaxy S25',
             description: 'Expected release: February 2025'
         },
         {
-            image: 'placeholder7.jpg',
+            image: 'content resources/google pixel.png',
             title: 'Google Pixel 9',
             description: 'Expected release: October 2024'
         }
@@ -202,159 +167,166 @@ function initializeNewsletterForm() {
     });
 }
 
-// Utility functions
+// Email validation function
 function isValidEmail(email) {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
 }
 
+// Notification system
 function showNotification(message, type) {
+    // Create notification element
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
     notification.textContent = message;
-
-    document.body.appendChild(notification);
-
-    // Remove notification after 3 seconds
-    setTimeout(() => {
-        notification.remove();
-    }, 3000);
-}
-
-// Add notification styles dynamically
-const style = document.createElement('style');
-style.textContent = `
-    .notification {
+    
+    // Style the notification
+    notification.style.cssText = `
         position: fixed;
-        bottom: 20px;
+        top: 20px;
         right: 20px;
         padding: 1rem 2rem;
         border-radius: 5px;
         color: white;
-        z-index: 1000;
-        animation: slideIn 0.3s ease-out;
-    }
+        font-weight: 500;
+        z-index: 10000;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        ${type === 'success' ? 'background-color: #4CAF50;' : 'background-color: #f44336;'}
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Animate in
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 3000);
+}
 
-    .notification.success {
-        background-color: #4CAF50;
-    }
-
-    .notification.error {
-        background-color: #f44336;
-    }
-
-    @keyframes slideIn {
-        from {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
-
+// Add carousel scroll button styles
+const style = document.createElement('style');
+style.textContent = `
     .carousel-scroll {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        background: rgba(255, 255, 255, 0.8);
+        background: rgba(0, 130, 200, 0.8);
+        color: white;
         border: none;
         border-radius: 50%;
         width: 40px;
         height: 40px;
         cursor: pointer;
-        z-index: 2;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: var(--shadow);
+        transition: all 0.3s ease;
+        z-index: 10;
     }
-
+    
+    .carousel-scroll:hover {
+        background: rgba(0, 130, 200, 1);
+        transform: translateY(-50%) scale(1.1);
+    }
+    
     .carousel-scroll.left {
         left: 10px;
     }
-
+    
     .carousel-scroll.right {
         right: 10px;
     }
-
+    
     .slideshow-container {
         position: relative;
-        max-width: 1000px;
+        max-width: 800px;
         margin: 0 auto;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
-
+    
+    .slides {
+        display: flex;
+        transition: transform 0.5s ease;
+    }
+    
     .slide {
-        display: none;
+        min-width: 100%;
         position: relative;
+        display: none;
     }
-
+    
     .slide.active {
         display: block;
     }
-
+    
     .slide img {
         width: 100%;
-        height: 400px;
+        height: 300px;
         object-fit: cover;
-        border-radius: 10px;
     }
-
+    
     .slide-content {
         position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
-        padding: 2rem;
-        background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
         color: white;
-        border-radius: 0 0 10px 10px;
+        padding: 2rem;
     }
-
+    
     .slideshow-nav {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        background: rgba(255, 255, 255, 0.8);
+        background: rgba(0, 130, 200, 0.8);
+        color: white;
         border: none;
         border-radius: 50%;
         width: 40px;
         height: 40px;
         cursor: pointer;
-        z-index: 2;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        transition: all 0.3s ease;
     }
-
+    
+    .slideshow-nav:hover {
+        background: rgba(0, 130, 200, 1);
+    }
+    
     .slideshow-nav.prev {
         left: 10px;
     }
-
+    
     .slideshow-nav.next {
         right: 10px;
     }
-
+    
     .slideshow-dots {
         position: absolute;
-        bottom: 20px;
+        bottom: 10px;
         left: 50%;
         transform: translateX(-50%);
         display: flex;
         gap: 10px;
     }
-
+    
     .dot {
-        width: 10px;
-        height: 10px;
+        width: 12px;
+        height: 12px;
         border-radius: 50%;
         background: rgba(255, 255, 255, 0.5);
         border: none;
         cursor: pointer;
-        padding: 0;
+        transition: all 0.3s ease;
     }
-
+    
     .dot.active {
         background: white;
     }

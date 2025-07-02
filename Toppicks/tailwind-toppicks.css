@@ -1,0 +1,486 @@
+/* ===== TAILWIND CSS TOPPICKS STYLESHEET ===== */
+/* This file contains all styles for the TechTrove Toppicks page using Tailwind CSS approach */
+
+/* Import Tailwind CSS */
+@import url('https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css');
+
+/* Custom CSS Variables for consistent theming */
+:root {
+    /* Primary Colors - High contrast for accessibility */
+    --primary-50: #f0f9ff;
+    --primary-100: #e0f2fe;
+    --primary-200: #bae6fd;
+    --primary-300: #7dd3fc;
+    --primary-400: #38bdf8;
+    --primary-500: #0ea5e9;
+    --primary-600: #0284c7;
+    --primary-700: #0369a1;
+    --primary-800: #075985;
+    --primary-900: #0c4a6e;
+    
+    /* Secondary Colors - Warm accent colors */
+    --secondary-50: #fef7ed;
+    --secondary-100: #fed7aa;
+    --secondary-200: #fdba74;
+    --secondary-300: #fb923c;
+    --secondary-400: #f97316;
+    --secondary-500: #ea580c;
+    --secondary-600: #dc2626;
+    --secondary-700: #b91c1c;
+    --secondary-800: #991b1b;
+    --secondary-900: #7f1d1d;
+    
+    /* Neutral Colors - For text and backgrounds */
+    --neutral-50: #fafafa;
+    --neutral-100: #f5f5f5;
+    --neutral-200: #e5e5e5;
+    --neutral-300: #d4d4d4;
+    --neutral-400: #a3a3a3;
+    --neutral-500: #737373;
+    --neutral-600: #525252;
+    --neutral-700: #404040;
+    --neutral-800: #262626;
+    --neutral-900: #171717;
+    
+    /* Success, Warning, Error Colors */
+    --success-500: #10b981;
+    --warning-500: #f59e0b;
+    --error-500: #ef4444;
+    
+    /* Shadows and Effects */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    
+    /* Transitions */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== BASE STYLES ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--neutral-800);
+    background-color: var(--neutral-50);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== NAVIGATION STYLES ===== */
+.navbar {
+    background-color: var(--primary-800);
+    border-bottom: 1px solid var(--primary-700);
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow-md);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 50;
+    transition: var(--transition-normal);
+}
+
+.navbar:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+.logo h1 {
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 0.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo p {
+    color: var(--primary-100);
+    font-size: 0.875rem;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    transition: var(--transition-normal);
+    position: relative;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+}
+
+.nav-links a:hover {
+    color: var(--secondary-300);
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--secondary-300);
+    transition: var(--transition-normal);
+    transform: translateX(-50%);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.navbar, .navbar * {
+    color: white !important;
+    transition: color 0.3s;
+}
+
+.navbar a:hover, .navbar .logo:hover, .navbar .nav-links a:hover {
+    color: #14b8a6 !important;
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+    background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 50%, var(--primary-800) 100%);
+    color: white;
+    padding: 5rem 5%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: white;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='1' height='1' fill='white'/%3E%3C/svg%3E");
+}
+
+.hero h2 {
+    font-size: 3.75rem;
+    font-family: 'Brush Script MT', cursive;
+    margin-bottom: 0.5rem;
+    color: white;
+    text-shadow: 6px 2px 4px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 10;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    font-family: 'Brush Script MT', cursive;
+    color: white;
+    text-shadow: 6px 2px 4px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 10;
+}
+
+/* ===== SMARTPHONES SECTION ===== */
+.smartphones {
+    padding: 3rem 5%;
+    background-color: white;
+}
+
+/* ===== IMAGE BUTTON STYLES ===== */
+.image-button {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    padding: 0;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-normal);
+}
+
+.image-button:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-lg);
+}
+
+.image-button img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+    transition: var(--transition-normal);
+}
+
+.image-button:hover img {
+    transform: scale(1.1);
+}
+
+.button-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    padding: 1.25rem 0;
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    margin: 1.25rem;
+}
+
+.button-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.button-container::-webkit-scrollbar-track {
+    background-color: var(--neutral-100);
+    border-radius: 4px;
+}
+
+.button-container::-webkit-scrollbar-thumb {
+    background-color: var(--neutral-400);
+    border-radius: 4px;
+}
+
+.button-container::-webkit-scrollbar-thumb:hover {
+    background-color: var(--neutral-500);
+}
+
+/* ===== BRAND SECTION ===== */
+.brand-section {
+    padding: 3rem 5%;
+    background-color: var(--neutral-50);
+}
+
+.brand-section h2 {
+    font-size: 2.25rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--neutral-800);
+}
+
+/* ===== PHONE CAROUSEL ===== */
+.phone-carousel {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    padding: 1rem 0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.phone-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.phone-card {
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--neutral-200);
+    padding: 1.5rem;
+    text-align: center;
+    min-width: 250px;
+    transition: var(--transition-normal);
+}
+
+.phone-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.phone-card img {
+    width: 4rem;
+    height: 4rem;
+    margin: 0 auto 1rem;
+    object-fit: contain;
+}
+
+.phone-card h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--neutral-800);
+    margin-bottom: 0.5rem;
+}
+
+.phone-card .price {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--primary-600);
+    margin-bottom: 0.5rem;
+}
+
+.phone-card .specs {
+    color: var(--neutral-600);
+    font-size: 0.875rem;
+}
+
+/* ===== FOOTER STYLES ===== */
+footer {
+    background-color: var(--neutral-900);
+    color: white;
+    padding: 3rem 1rem;
+}
+
+.footer-content {
+    max-width: 80rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.footer-section h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section a {
+    color: white;
+    transition: color 0.3s;
+}
+
+.footer-section a:hover {
+    color: var(--secondary-300);
+}
+
+footer, footer * {
+    color: white !important;
+    transition: color 0.3s;
+}
+
+footer a:hover, .footer-section a:hover, .footer-section h3:hover {
+    color: #14b8a6 !important;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-links a {
+    color: white;
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: var(--secondary-300);
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--neutral-800);
+    margin-top: 2rem;
+    padding-top: 2rem;
+    text-align: center;
+    color: white;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.75rem 1rem;
+    }
+    
+    .nav-links {
+        gap: 1rem;
+    }
+    
+    .hero h2 {
+        font-size: 2.5rem;
+    }
+    
+    .hero p {
+        font-size: 1.25rem;
+    }
+    
+    .button-container {
+        gap: 1rem;
+        margin: 1rem;
+    }
+    
+    .image-button {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .phone-carousel {
+        gap: 1rem;
+    }
+    
+    .phone-card {
+        min-width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h2 {
+        font-size: 2rem;
+    }
+    
+    .brand-section h2 {
+        font-size: 1.875rem;
+    }
+    
+    .image-button {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+/* ===== ACCESSIBILITY IMPROVEMENTS ===== */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus styles for better accessibility */
+button:focus,
+a:focus,
+input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--primary-500);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --primary-600: #000080;
+        --primary-700: #000060;
+        --secondary-500: #ff0000;
+        --neutral-800: #000000;
+        --neutral-600: #333333;
+    }
+}

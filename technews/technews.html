@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechTrove - Tech News</title>
+    <link rel="stylesheet" href="../styles/tailwind-main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .technews-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .technews-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(36,72,85,0.10);
+            padding: 1.5rem 1.2rem;
+            min-width: 270px;
+            max-width: 340px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: box-shadow 0.2s;
+        }
+        .technews-card:hover {
+            box-shadow: 0 8px 32px rgba(36,72,85,0.18);
+        }
+        .technews-card h3 {
+            font-size: 1.15rem;
+            color: #244855;
+            margin-bottom: 0.7rem;
+        }
+        .technews-card p {
+            color: #444;
+            font-size: 1rem;
+            margin-bottom: 1.2rem;
+        }
+        .technews-card a {
+            color: #E64833;
+            font-weight: 600;
+            text-decoration: none;
+            align-self: flex-end;
+            margin-top: auto;
+        }
+        .technews-summary {
+            font-size: 1.15rem;
+            color: #244855;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        @media (max-width: 800px) {
+            .technews-row { flex-direction: column; align-items: center; }
+            .technews-card { min-width: 90vw; max-width: 98vw; }
+        }
+        footer a {
+            transition: color 0.2s;
+        }
+        footer a:hover {
+            color: #E64833 !important;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <header style="background: #fff; box-shadow: 0 2px 8px rgba(36,72,85,0.07); padding: 1.5rem 0 1rem 0; position: sticky; top: 0; z-index: 100;">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; padding: 0 2rem;">
+            <div style="display: flex; flex-direction: column;">
+                <h1 style="font-size: 2rem; font-weight: 700; color: #244855; margin: 0; letter-spacing: 1px;"><i class="fas fa-treasure-chest"></i> TechTrove</h1>
+                <p style="color: #244855; font-size: 1.1rem; margin: 0;">Your Treasure Trove of Tech Knowledge</p>
+            </div>
+            <nav>
+                <ul style="display: flex; gap: 1.5rem; list-style: none; margin: 0; padding: 0; font-size: 1.1rem;">
+                    <li><a href="../home.html" style="color: #244855; text-decoration: none; font-weight: 500;">Home</a></li>
+                    <li><a href="../recommendation/recommendation.html" style="color: #244855; text-decoration: none; font-weight: 500;">Recommendation</a></li>
+                    <li><a href="../features/features.html" style="color: #244855; text-decoration: none; font-weight: 500;">Tech Explained</a></li>
+                    <li><a href="technews.html" style="color: #E64833; text-decoration: none; font-weight: 700; border-bottom: 2px solid #E64833;">Tech News</a></li>
+                    <li><a href="https://pricehistory.app/" target="_blank" style="color: #244855; text-decoration: none; font-weight: 500;">Live Price</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main style="max-width: 1100px; margin: 0 auto; padding: 3.5rem 1rem 2rem 1rem;">
+        <h1 style="font-size:2.2rem; color:#244855; margin-bottom:1.5rem; text-align:center; margin-top:2.5rem;">Latest Tech News</h1>
+        <div id="technews-container"></div>
+    </main>
+
+    <footer style="background: #181818; color: #fff; padding: 2.5rem 0 0 0; margin-top: 3rem;">
+      <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem; padding: 0 2rem;">
+        <div>
+          <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem;">TechTrove</h3>
+          <p style="color: #ccc;">Your trusted guide to tech knowledge</p>
+            </div>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">Quick Links</h3>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li><a href="../about.html" style="color: #fff; text-decoration: none;">About</a></li>
+            <li><a href="../terms.html" style="color: #fff; text-decoration: none;">Terms</a></li>
+            <li><a href="../privacy.html" style="color: #fff; text-decoration: none;">Privacy</a></li>
+            <li><a href="../contact.html" style="color: #fff; text-decoration: none;">Contact</a></li>
+                </ul>
+            </div>
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">Connect With Us</h3>
+          <div style="display: flex; gap: 0.7rem; font-size: 1.4rem;">
+            <a href="https://linkedin.com" target="_blank" style="color: #fff;"><i class="fab fa-linkedin"></i></a>
+            <a href="https://twitter.com" target="_blank" style="color: #fff;"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com" target="_blank" style="color: #fff;"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com" target="_blank" style="color: #fff;"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+      <hr style="border: none; border-top: 1px solid #333; margin: 2rem 0 1rem 0;">
+      <div style="text-align: center; color: #ccc; font-size: 1rem; padding-bottom: 1rem;">
+        &copy; 2025 TechTrove. All Rights Reserved.
+        </div>
+    </footer>
+    <script src="technews.js"></script>
+</body>
+</html>

@@ -3,10 +3,1650 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recommendation Page</title>
-    
+    <title>TechTrove Recommendation - Find Your Perfect Device</title>
+    <link rel="stylesheet" href="../styles/tailwind-main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .recommendation-container {
+            max-width: 800px;
+            margin: 100px auto 2rem;
+            padding: 0 20px;
+        }
+        
+        .welcome-section {
+            text-align: center;
+            background: linear-gradient(135deg, #244855, #90AEAD);
+            padding: 4rem 2rem;
+            border-radius: 20px;
+            color: white;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 25px rgba(36, 72, 85, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .welcome-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(36, 72, 85, 0.3);
+        }
+        
+        .welcome-section h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .welcome-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .start-btn {
+            background: #E64833;
+            color: white;
+            border: none;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(230, 72, 51, 0.3);
+        }
+        
+        .start-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(230, 72, 51, 0.4);
+            background: #D63384;
+        }
+        
+        .questionnaire-section {
+            display: none;
+        }
+        
+        .questionnaire-section.active {
+            display: block;
+        }
+        
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #244855, #90AEAD);
+            padding: 1rem;
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 8px 25px rgba(36, 72, 85, 0.2);
+        }
+        
+        .quiz-header h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .quiz-progress {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: #E64833;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .question-container {
+            background: #FFFFFF;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 25px rgba(36, 72, 85, 0.15);
+            margin-bottom: 1rem;
+            display: none;
+            border: 1px solid rgba(144, 174, 173, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .question-container.active {
+            display: block;
+            animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .question {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #244855;
+        }
+        
+        .question-subtitle {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #244855;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #90AEAD;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #FBE9D0;
+            color: #244855;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: #E64833;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(230, 72, 51, 0.1);
+        }
+        
+        .input-group input.error {
+            border-color: #E64833;
+        }
+        
+        .error-message {
+            color: #E64833;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        
+        .options {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .option {
+            background: #FBE9D0;
+            border: 2px solid #90AEAD;
+            border-radius: 10px;
+            padding: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .option:hover {
+            border-color: #E64833;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(230, 72, 51, 0.1);
+        }
+        
+        .option.selected {
+            border-color: #E64833;
+            background: #E64833;
+            color: white;
+        }
+        
+        .option-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .option-text {
+            flex: 1;
+        }
+        
+        .option-title {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .option-description {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .multi-select-options {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .multi-select-option {
+            background: #FBE9D0;
+            border: 2px solid #90AEAD;
+            border-radius: 10px;
+            padding: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .multi-select-option:hover {
+            border-color: #E64833;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(230, 72, 51, 0.1);
+        }
+        
+        .multi-select-option.selected {
+            border-color: #E64833;
+            background: #E64833;
+            color: white;
+        }
+        
+        .selection-limit {
+            background: #FBE9D0;
+            color: #244855;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            gap: 1rem;
+        }
+        
+        .nav-btn {
+            background: #90AEAD;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .nav-btn:hover {
+            background: #244855;
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .next-btn {
+            background: #E64833;
+        }
+        
+        .next-btn:hover {
+            background: #D63384;
+        }
+        
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .loading-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #E64833;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .results-section {
+            display: none;
+        }
+        
+        .results-section.active {
+            display: block;
+            animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
 </head>
 <body>
-    
+    <!-- Navigation Bar -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1><i class="fas fa-treasure-chest"></i> TechTrove</h1>
+                <p>Your Treasure Trove of Tech Knowledge</p>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../home.html" target="_self">Home</a></li>
+                <li><a href="recommendation.html" target="_self" class="active">Recommendation</a></li>
+                <li><a href="../features/features.html" target="_self">Tech Explained</a></li>
+                <li><a href="../technews/technews.html" target="_blank">Tech News</a></li>
+                <li><a href="https://pricehistory.app/" target="_blank">Live Price</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="recommendation-container">
+            <!-- Welcome Section -->
+            <div id="welcomeSection" class="welcome-section">
+                <h1>🔹 Getting Started</h1>
+                <p>Let's find your perfect device together!</p>
+                
+                <div class="input-group">
+                    <label for="userName">What's your name?</label>
+                    <input type="text" id="userName" placeholder="Enter your name">
+                    <div class="question-subtitle">Let's start with something easy. What should I call you? 😊</div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="userEmail">Your mail ID:</label>
+                    <input type="email" id="userEmail" placeholder="Enter your email">
+                    <div class="question-subtitle">Drop your email here — we'll make sure it's valid before moving ahead!</div>
+                    <div id="emailError" class="error-message">Please enter a valid email address</div>
+                </div>
+                
+                <button id="nextStep1" class="start-btn" disabled>Next</button>
+            </div>
+
+            <!-- Questionnaire Section -->
+            <div id="questionnaireSection" class="questionnaire-section">
+                <div class="quiz-header">
+                    <h2 id="quizTitle">Welcome to TechTrove!</h2>
+                    <div class="quiz-progress">
+                        <div id="progressBar" class="progress-bar"></div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Device Selection -->
+                <div id="step2" class="question-container">
+                    <div class="question">Hi <span id="userNameDisplay">there</span>, super excited to help you out!</div>
+                    <div class="question-subtitle">What device are you looking to buy?</div>
+                    
+                    <div class="options">
+                        <div class="option" data-value="smartphone">
+                            <div class="option-icon">📱</div>
+                            <div class="option-text">
+                                <div class="option-title">Smartphone</div>
+                                <div class="option-description">Mobile phones for communication and apps</div>
+                            </div>
+                        </div>
+                        <div class="option" data-value="tablet">
+                            <div class="option-icon">📱</div>
+                            <div class="option-text">
+                                <div class="option-title">Tablet</div>
+                                <div class="option-description">Portable computing devices</div>
+                            </div>
+                        </div>
+                        <div class="option" data-value="laptop">
+                            <div class="option-icon">💻</div>
+                            <div class="option-text">
+                                <div class="option-title">Laptop</div>
+                                <div class="option-description">Portable computers for work and entertainment</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="navigation-buttons">
+                        <button id="prevStep2" class="nav-btn">Previous</button>
+                        <button id="nextStep2" class="nav-btn next-btn" disabled>Next</button>
+                    </div>
+                </div>
+
+                <!-- Smartphone Questions -->
+                <div id="smartphone-questions" style="display: none;">
+                    <!-- Step 3: Lifestyle Fit -->
+                    <div id="step3-smartphone" class="question-container">
+                        <div class="question">👤 Lifestyle Fit</div>
+                        <div class="question-subtitle">Your phone should match your vibe. What best describes you right now?</div>
+                        
+                        <div class="options">
+                            <div class="option" data-value="student">
+                                <div class="option-icon">🎓</div>
+                                <div class="option-text">
+                                    <div class="option-title">Student</div>
+                                    <div class="option-description">Currently studying or in education</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="working_professional">
+                                <div class="option-icon">💼</div>
+                                <div class="option-text">
+                                    <div class="option-title">Working professional (Tech/Office)</div>
+                                    <div class="option-description">Corporate or tech industry work</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="business_owner">
+                                <div class="option-icon">🏢</div>
+                                <div class="option-text">
+                                    <div class="option-title">Business owner</div>
+                                    <div class="option-description">Running your own business</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="content_creator">
+                                <div class="option-icon">📹</div>
+                                <div class="option-text">
+                                    <div class="option-title">Content creator</div>
+                                    <div class="option-description">Creating videos, photos, or digital content</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="retired_casual">
+                                <div class="option-icon">🌅</div>
+                                <div class="option-text">
+                                    <div class="option-title">Retired / Casual user</div>
+                                    <div class="option-description">Relaxed usage for basic needs</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="navigation-buttons">
+                            <button id="prevStep3-smartphone" class="nav-btn">Previous</button>
+                            <button id="nextStep3-smartphone" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Usage Patterns -->
+                    <div id="step4-smartphone" class="question-container">
+                        <div class="question">How do you primarily use your phone?</div>
+                        <div class="question-subtitle">What do you usually whip out your phone for? Choose up to 3!</div>
+                        <div class="selection-limit">Select up to 3 options</div>
+                        
+                        <div class="multi-select-options">
+                            <div class="multi-select-option" data-value="social_media_messaging">
+                                <div class="option-title">Social Media & Messaging</div>
+                                <div class="option-description">WhatsApp, Instagram, Facebook, etc.</div>
+                            </div>
+                            <div class="multi-select-option" data-value="photography_videography">
+                                <div class="option-title">Photography & Videography</div>
+                                <div class="option-description">Taking photos, videos, and editing them</div>
+                            </div>
+                            <div class="multi-select-option" data-value="gaming">
+                                <div class="option-title">Gaming</div>
+                                <div class="option-description">Mobile games and entertainment</div>
+                            </div>
+                            <div class="multi-select-option" data-value="reading_productivity">
+                                <div class="option-title">Reading / Productivity</div>
+                                <div class="option-description">Reading, note-taking, productivity apps</div>
+                            </div>
+                            <div class="multi-select-option" data-value="business_finance">
+                                <div class="option-title">Business / Finance apps</div>
+                                <div class="option-description">Banking, trading, business tools</div>
+                            </div>
+                            <div class="multi-select-option" data-value="watching_content">
+                                <div class="option-title">Watching movies / YouTube</div>
+                                <div class="option-description">Streaming videos and entertainment</div>
+                            </div>
+                            <div class="multi-select-option" data-value="calling_basic">
+                                <div class="option-title">Calling & Basic Use</div>
+                                <div class="option-description">Phone calls, texts, basic functions</div>
+                            </div>
+                        </div>
+                        
+                        <div class="navigation-buttons">
+                            <button id="prevStep4-smartphone" class="nav-btn">Previous</button>
+                            <button id="nextStep4-smartphone" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Screen Size -->
+                    <div id="step5-smartphone" class="question-container">
+                        <div class="question">Preferred screen size</div>
+                        <div class="question-subtitle">How do you like your screen? Just right or maxed out?</div>
+                        
+                        <div class="options">
+                            <div class="option" data-value="compact">
+                                <div class="option-icon">📱</div>
+                                <div class="option-text">
+                                    <div class="option-title">Compact (<6.1 inches)</div>
+                                    <div class="option-description">Easy to handle with one hand</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="medium">
+                                <div class="option-icon">📱</div>
+                                <div class="option-text">
+                                    <div class="option-title">Medium (6.1–6.6 inches)</div>
+                                    <div class="option-description">Balanced size for most users</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="large">
+                                <div class="option-icon">📱</div>
+                                <div class="option-text">
+                                    <div class="option-title">Large (>6.6 inches)</div>
+                                    <div class="option-description">Maximum screen real estate</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="navigation-buttons">
+                            <button id="prevStep5-smartphone" class="nav-btn">Previous</button>
+                            <button id="nextStep5-smartphone" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 6: Device Build -->
+                    <div id="step6-smartphone" class="question-container">
+                        <div class="question">Preferred device build</div>
+                        <div class="question-subtitle">What's more important — looks, toughness, or you don't really mind?</div>
+                        
+                        <div class="options">
+                            <div class="option" data-value="sleek_lightweight">
+                                <div class="option-icon">✨</div>
+                                <div class="option-text">
+                                    <div class="option-title">Sleek & lightweight</div>
+                                    <div class="option-description">Premium feel and easy to carry</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="rugged_battery">
+                                <div class="option-icon">🔋</div>
+                                <div class="option-text">
+                                    <div class="option-title">Rugged / Long battery life</div>
+                                    <div class="option-description">Durable and long-lasting</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="premium_materials">
+                                <div class="option-icon">💎</div>
+                                <div class="option-text">
+                                    <div class="option-title">Premium materials (glass/metal)</div>
+                                    <div class="option-description">High-end build quality</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="doesnt_matter">
+                                <div class="option-icon">🤷</div>
+                                <div class="option-text">
+                                    <div class="option-title">Doesn't matter</div>
+                                    <div class="option-description">Functionality over form</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="navigation-buttons">
+                            <button id="prevStep6-smartphone" class="nav-btn">Previous</button>
+                            <button id="nextStep6-smartphone" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 7: OS Preference -->
+                    <div id="step7-smartphone" class="question-container">
+                        <div class="question">Preferred OS</div>
+                        <div class="question-subtitle">Got a favorite OS, or are you open to exploring?</div>
+                        
+                        <div class="options">
+                            <div class="option" data-value="android">
+                                <div class="option-icon">🤖</div>
+                                <div class="option-text">
+                                    <div class="option-title">Android</div>
+                                    <div class="option-description">Google's mobile operating system</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="ios">
+                                <div class="option-icon">🍎</div>
+                                <div class="option-text">
+                                    <div class="option-title">iOS</div>
+                                    <div class="option-description">Apple's mobile operating system</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="open_to_both">
+                                <div class="option-icon">🔄</div>
+                                <div class="option-text">
+                                    <div class="option-title">Open to both</div>
+                                    <div class="option-description">Flexible with operating system choice</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="navigation-buttons">
+                            <button id="prevStep7-smartphone" class="nav-btn">Previous</button>
+                            <button id="nextStep7-smartphone" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 8: Budget -->
+                    <div id="step8-smartphone" class="question-container">
+                        <div class="question">What's your smartphone budget?</div>
+                        <div class="question-subtitle">What's your comfort zone for spending on a phone?</div>
+                        
+                        <div class="options">
+                            <div class="option" data-value="under_10000">
+                                <div class="option-icon">💰</div>
+                                <div class="option-text">
+                                    <div class="option-title">Under ₹10,000</div>
+                                    <div class="option-description">Budget-friendly options</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="10000_20000">
+                                <div class="option-icon">💰</div>
+                                <div class="option-text">
+                                    <div class="option-title">₹10,000 – ₹20,000</div>
+                                    <div class="option-description">Mid-range smartphones</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="20000_30000">
+                                <div class="option-icon">💰</div>
+                                <div class="option-text">
+                                    <div class="option-title">₹20,000 – ₹30,000</div>
+                                    <div class="option-description">Upper mid-range devices</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="30000_50000">
+                                <div class="option-icon">💰</div>
+                                <div class="option-text">
+                                    <div class="option-title">₹30,000 – ₹50,000</div>
+                                    <div class="option-description">Premium mid-range to flagship</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="50000_75000">
+                                <div class="option-icon">💰</div>
+                                <div class="option-text">
+                                    <div class="option-title">₹50,000 – ₹75,000</div>
+                                    <div class="option-description">Flagship smartphones</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="75000_plus">
+                                <div class="option-icon">💰</div>
+                                <div class="option-text">
+                                    <div class="option-title">₹75,000+</div>
+                                    <div class="option-description">Ultra-premium devices</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="navigation-buttons">
+                            <button id="prevStep8-smartphone" class="nav-btn">Previous</button>
+                            <button id="nextStep8-smartphone" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 9: Usage Duration -->
+                    <div id="step9-smartphone" class="question-container">
+                        <div class="question">How many years do you plan to use the device?</div>
+                        <div class="question-subtitle">Planning a short fling or a long-term relationship with your phone?</div>
+                        
+                        <div class="options">
+                            <div class="option" data-value="1_2_years">
+                                <div class="option-icon">📅</div>
+                                <div class="option-text">
+                                    <div class="option-title">1–2 years</div>
+                                    <div class="option-description">Short-term usage</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="2_3_years">
+                                <div class="option-icon">📅</div>
+                                <div class="option-text">
+                                    <div class="option-title">2–3 years</div>
+                                    <div class="option-description">Medium-term usage</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="3_plus_years">
+                                <div class="option-icon">📅</div>
+                                <div class="option-text">
+                                    <div class="option-title">3+ years</div>
+                                    <div class="option-description">Long-term investment</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="navigation-buttons">
+                            <button id="prevStep9-smartphone" class="nav-btn">Previous</button>
+                            <button id="nextStep9-smartphone" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 10: Purchase Preferences -->
+                    <div id="step10-smartphone" class="question-container">
+                        <div class="question">Would you be open to:</div>
+                        <div class="question-subtitle">Would you be okay with these options if they gave you more bang for your buck?</div>
+                        <div class="selection-limit">Select up to 2 options</div>
+                        
+                        <div class="multi-select-options">
+                            <div class="multi-select-option" data-value="lesser_known_brand">
+                                <div class="option-title">Buying from a lesser-known brand if specs are good</div>
+                                <div class="option-description">Open to exploring new brands</div>
+                            </div>
+                            <div class="multi-select-option" data-value="last_year_flagship">
+                                <div class="option-title">Going with last year's flagship model</div>
+                                <div class="option-description">Previous generation premium devices</div>
+                            </div>
+                            <div class="multi-select-option" data-value="stretch_budget">
+                                <div class="option-title">Slightly stretching your budget for longer durability</div>
+                                <div class="option-description">Investing more for better longevity</div>
+                            </div>
+                            <div class="multi-select-option" data-value="refurbished">
+                                <div class="option-title">Refurbished / Renewed options</div>
+                                <div class="option-description">Certified pre-owned devices</div>
+                            </div>
+                        </div>
+                        
+                        <div class="navigation-buttons">
+                            <button id="prevStep10-smartphone" class="nav-btn">Previous</button>
+                            <button id="nextStep10-smartphone" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 11: Trade-offs -->
+                    <div id="step11-smartphone" class="question-container">
+                        <div class="question">Which trade-offs are you willing to make (if needed)?</div>
+                        <div class="question-subtitle">If needed, what are you ready to compromise on? (Only if really needed!)</div>
+                        <div class="selection-limit">Select up to 2 options</div>
+                        
+                        <div class="multi-select-options">
+                            <div class="multi-select-option" data-value="camera_quality">
+                                <div class="option-title">Camera quality</div>
+                                <div class="option-description">Lower camera performance</div>
+                            </div>
+                            <div class="multi-select-option" data-value="build_quality">
+                                <div class="option-title">Build quality</div>
+                                <div class="option-description">Less premium materials</div>
+                            </div>
+                            <div class="multi-select-option" data-value="battery_life">
+                                <div class="option-title">Battery life</div>
+                                <div class="option-description">Shorter battery duration</div>
+                            </div>
+                            <div class="multi-select-option" data-value="display_quality">
+                                <div class="option-title">Display quality (e.g., LCD vs AMOLED)</div>
+                                <div class="option-description">Lower resolution or technology</div>
+                            </div>
+                            <div class="multi-select-option" data-value="software_experience">
+                                <div class="option-title">Software experience / updates</div>
+                                <div class="option-description">Fewer updates or slower performance</div>
+                            </div>
+                        </div>
+                        
+                        <div class="navigation-buttons">
+                            <button id="prevStep11-smartphone" class="nav-btn">Previous</button>
+                            <button id="nextStep11-smartphone" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 12: Optional Features -->
+                    <div id="step12-smartphone" class="question-container">
+                        <div class="question">Features you'd love to have (prioritize):</div>
+                        <div class="question-subtitle">Your wishlist — what features would make you smile every day?</div>
+                        <div class="selection-limit">Select up to 3 options</div>
+                        
+                        <div class="multi-select-options">
+                            <div class="multi-select-option" data-value="5g_support">
+                                <div class="option-title">5G support</div>
+                                <div class="option-description">Future-proof connectivity</div>
+                            </div>
+                            <div class="multi-select-option" data-value="last_year_better_specs">
+                                <div class="option-title">Last year's model with better specs</div>
+                                <div class="option-description">Previous flagship with current features</div>
+                            </div>
+                            <div class="multi-select-option" data-value="good_low_light_camera">
+                                <div class="option-title">Good low-light camera</div>
+                                <div class="option-description">Excellent night photography</div>
+                            </div>
+                            <div class="multi-select-option" data-value="ultra_wide_telephoto">
+                                <div class="option-title">Ultra-wide or telephoto lens</div>
+                                <div class="option-description">Versatile camera system</div>
+                            </div>
+                            <div class="multi-select-option" data-value="long_battery">
+                                <div class="option-title">Long-lasting battery (5000mAh+)</div>
+                                <div class="option-description">Extended usage time</div>
+                            </div>
+                            <div class="multi-select-option" data-value="fast_charging">
+                                <div class="option-title">Fast charging (50W+)</div>
+                                <div class="option-description">Quick power top-ups</div>
+                            </div>
+                            <div class="multi-select-option" data-value="high_refresh_rate">
+                                <div class="option-title">High refresh rate display</div>
+                                <div class="option-description">Smooth scrolling and gaming</div>
+                            </div>
+                            <div class="multi-select-option" data-value="expandable_storage">
+                                <div class="option-title">Expandable storage</div>
+                                <div class="option-description">MicroSD card support</div>
+                            </div>
+                            <div class="multi-select-option" data-value="clean_android">
+                                <div class="option-title">Clean or stock Android experience</div>
+                                <div class="option-description">Minimal bloatware</div>
+                            </div>
+                        </div>
+                        
+                        <div class="navigation-buttons">
+                            <button id="prevStep12-smartphone" class="nav-btn">Previous</button>
+                            <button id="nextStep12-smartphone" class="nav-btn next-btn" disabled>Get Recommendations</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tablet Questions -->
+                <div id="tablet-questions" style="display: none;">
+                    <!-- Step 3: Primary Use Case (multi-select, max 3) -->
+                    <div id="step3-tablet" class="question-container">
+                        <div class="question">What's your primary use case for a tablet?</div>
+                        <div class="question-subtitle">How do you plan to use your new tablet? Go ahead, tick up to 3!</div>
+                        <div class="selection-limit">Select up to 3 options</div>
+                        <div class="multi-select-options">
+                            <div class="multi-select-option" data-value="online_learning">Online learning / Study</div>
+                            <div class="multi-select-option" data-value="note_taking">Note-taking & Annotation</div>
+                            <div class="multi-select-option" data-value="reading">Reading eBooks / PDFs</div>
+                            <div class="multi-select-option" data-value="watching_videos">Watching videos / Movies</div>
+                            <div class="multi-select-option" data-value="gaming">Gaming</div>
+                            <div class="multi-select-option" data-value="art_design">Art & design (drawing/sketching)</div>
+                            <div class="multi-select-option" data-value="video_calls">Video calls / Communication</div>
+                            <div class="multi-select-option" data-value="office_productivity">Office productivity (Docs, Sheets, Presentations)</div>
+                            <div class="multi-select-option" data-value="content_creation">Content creation / Editing</div>
+                            <div class="multi-select-option" data-value="browsing_multitasking">Browsing & light multitasking</div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button id="prevStep3-tablet" class="nav-btn">Previous</button>
+                            <button id="nextStep3-tablet" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+                    <!-- Step 4: Professional Background (single choice) -->
+                    <div id="step4-tablet" class="question-container">
+                        <div class="question">What's your professional background?</div>
+                        <div class="question-subtitle">Where do you fit professionally these days?</div>
+                        <div class="options">
+                            <div class="option" data-value="student">
+                                <div class="option-icon">🎓</div>
+                                <div class="option-text">
+                                    <div class="option-title">Student</div>
+                                    <div class="option-description">Currently studying or in education</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="educator">
+                                <div class="option-icon">👨‍🏫</div>
+                                <div class="option-text">
+                                    <div class="option-title">Educator / Teacher</div>
+                                    <div class="option-description">Teaching or educational role</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="working_professional">
+                                <div class="option-icon">💼</div>
+                                <div class="option-text">
+                                    <div class="option-title">Working professional</div>
+                                    <div class="option-description">Corporate or office work</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="freelancer">
+                                <div class="option-icon">🎨</div>
+                                <div class="option-text">
+                                    <div class="option-title">Freelancer / Creative artist</div>
+                                    <div class="option-description">Independent creative work</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="business_user">
+                                <div class="option-icon">🏢</div>
+                                <div class="option-text">
+                                    <div class="option-title">Business user</div>
+                                    <div class="option-description">Business or enterprise use</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="casual_user">
+                                <div class="option-icon">🏠</div>
+                                <div class="option-text">
+                                    <div class="option-title">Casual / Home user</div>
+                                    <div class="option-description">Personal and home use</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button id="prevStep4-tablet" class="nav-btn">Previous</button>
+                            <button id="nextStep4-tablet" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+                    <!-- Step 5: Preferred Display Size (single choice) -->
+                    <div id="step5-tablet" class="question-container">
+                        <div class="question">Preferred display size?</div>
+                        <div class="question-subtitle">What's your screen sweet spot?</div>
+                        <div class="options">
+                            <div class="option" data-value="compact">
+                                <div class="option-icon">📱</div>
+                                <div class="option-text">
+                                    <div class="option-title">Compact (<9 inches)</div>
+                                    <div class="option-description">Easy to carry and handle</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="standard">
+                                <div class="option-icon">📱</div>
+                                <div class="option-text">
+                                    <div class="option-title">Standard (9–11 inches)</div>
+                                    <div class="option-description">Balanced size for most uses</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="large">
+                                <div class="option-icon">📱</div>
+                                <div class="option-text">
+                                    <div class="option-title">Large (11+ inches)</div>
+                                    <div class="option-description">Maximum screen real estate</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button id="prevStep5-tablet" class="nav-btn">Previous</button>
+                            <button id="nextStep5-tablet" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+                    <!-- Step 6: Stylus Support (single choice) -->
+                    <div id="step6-tablet" class="question-container">
+                        <div class="question">Do you want stylus/pencil support?</div>
+                        <div class="question-subtitle">Planning to scribble, sketch, or just swipe?</div>
+                        <div class="options">
+                            <div class="option" data-value="integrated">
+                                <div class="option-icon">✏️</div>
+                                <div class="option-text">
+                                    <div class="option-title">Yes, integrated/stylus included</div>
+                                    <div class="option-description">Built-in stylus support</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="optional">
+                                <div class="option-icon">✏️</div>
+                                <div class="option-text">
+                                    <div class="option-title">Yes, but optional</div>
+                                    <div class="option-description">Stylus support available</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="not_needed">
+                                <div class="option-icon">👆</div>
+                                <div class="option-text">
+                                    <div class="option-title">Not needed</div>
+                                    <div class="option-description">Touch and finger input only</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button id="prevStep6-tablet" class="nav-btn">Previous</button>
+                            <button id="nextStep6-tablet" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+                    <!-- Step 7: OS Preference (single choice) -->
+                    <div id="step7-tablet" class="question-container">
+                        <div class="question">OS preference</div>
+                        <div class="question-subtitle">Got a favorite operating system in mind?</div>
+                        <div class="options">
+                            <div class="option" data-value="android">
+                                <div class="option-icon">🤖</div>
+                                <div class="option-text">
+                                    <div class="option-title">Android</div>
+                                    <div class="option-description">Google's mobile operating system</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="ipados">
+                                <div class="option-icon">🍎</div>
+                                <div class="option-text">
+                                    <div class="option-title">iPadOS</div>
+                                    <div class="option-description">Apple's tablet operating system</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="windows">
+                                <div class="option-icon">🪟</div>
+                                <div class="option-text">
+                                    <div class="option-title">Windows</div>
+                                    <div class="option-description">Microsoft's operating system</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="open_to_all">
+                                <div class="option-icon">🔄</div>
+                                <div class="option-text">
+                                    <div class="option-title">Open to all</div>
+                                    <div class="option-description">Flexible with operating system choice</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button id="prevStep7-tablet" class="nav-btn">Previous</button>
+                            <button id="nextStep7-tablet" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+                    <!-- Step 8: Feature Priorities (multi-select, max 3) -->
+                    <div id="step8-tablet" class="question-container">
+                        <div class="question">What matters most to you?</div>
+                        <div class="question-subtitle">Pick your top priorities — what really matters in your tablet experience?</div>
+                        <div class="selection-limit">Select up to 3 options</div>
+                        <div class="multi-select-options">
+                            <div class="multi-select-option" data-value="long_battery">Long battery life</div>
+                            <div class="multi-select-option" data-value="fast_performance">Fast performance</div>
+                            <div class="multi-select-option" data-value="display_quality">Display quality (e.g., OLED, high brightness)</div>
+                            <div class="multi-select-option" data-value="multitasking">Multitasking support (Split screen etc.)</div>
+                            <div class="multi-select-option" data-value="app_ecosystem">App ecosystem (Google Play / App Store)</div>
+                            <div class="multi-select-option" data-value="good_front_camera">Good front camera for video calls</div>
+                            <div class="multi-select-option" data-value="stylus_latency">Stylus latency / note-taking performance</div>
+                            <div class="multi-select-option" data-value="desktop_productivity">Desktop-like productivity (keyboard support etc.)</div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button id="prevStep8-tablet" class="nav-btn">Previous</button>
+                            <button id="nextStep8-tablet" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+                    <!-- Step 9: Connectivity Options (multi-select, max 2) -->
+                    <div id="step9-tablet" class="question-container">
+                        <div class="question">Connectivity options needed</div>
+                        <div class="question-subtitle">What kind of connections do you need? Choose up to 2.</div>
+                        <div class="selection-limit">Select up to 2 options</div>
+                        <div class="multi-select-options">
+                            <div class="multi-select-option" data-value="wifi_only">Wi-Fi only</div>
+                            <div class="multi-select-option" data-value="cellular">Cellular (4G/5G SIM slot)</div>
+                            <div class="multi-select-option" data-value="usb_c">USB-C port</div>
+                            <div class="multi-select-option" data-value="headphone_jack">Headphone jack</div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button id="prevStep9-tablet" class="nav-btn">Previous</button>
+                            <button id="nextStep9-tablet" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+                    <!-- Step 10: Budget (single choice) -->
+                    <div id="step10-tablet" class="question-container">
+                        <div class="question">What's your budget?</div>
+                        <div class="question-subtitle">How much are you looking to invest in your new tablet?</div>
+                        <div class="options">
+                            <div class="option" data-value="under_10000">
+                                <div class="option-icon">💰</div>
+                                <div class="option-text">
+                                    <div class="option-title">Under ₹10,000</div>
+                                    <div class="option-description">Budget-friendly options</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="10000_20000">
+                                <div class="option-icon">💰</div>
+                                <div class="option-text">
+                                    <div class="option-title">₹10,000–₹20,000</div>
+                                    <div class="option-description">Mid-range tablets</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="20000_30000">
+                                <div class="option-icon">💰</div>
+                                <div class="option-text">
+                                    <div class="option-title">₹20,000–₹30,000</div>
+                                    <div class="option-description">Upper mid-range devices</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="30000_50000">
+                                <div class="option-icon">💰</div>
+                                <div class="option-text">
+                                    <div class="option-title">₹30,000–₹50,000</div>
+                                    <div class="option-description">Premium tablets</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="50000_75000">
+                                <div class="option-icon">💰</div>
+                                <div class="option-text">
+                                    <div class="option-title">₹50,000–₹75,000</div>
+                                    <div class="option-description">High-end tablets</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="75000_plus">
+                                <div class="option-icon">💰</div>
+                                <div class="option-text">
+                                    <div class="option-title">₹75,000+</div>
+                                    <div class="option-description">Ultra-premium devices</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button id="prevStep10-tablet" class="nav-btn">Previous</button>
+                            <button id="nextStep10-tablet" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+                    <!-- Step 11: Usage Duration (single choice) -->
+                    <div id="step11-tablet" class="question-container">
+                        <div class="question">How many years do you plan to use it?</div>
+                        <div class="question-subtitle">What's the expected life journey of your tablet?</div>
+                        <div class="options">
+                            <div class="option" data-value="1_2_years">
+                                <div class="option-icon">📅</div>
+                                <div class="option-text">
+                                    <div class="option-title">1–2 years</div>
+                                    <div class="option-description">Short-term usage</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="2_3_years">
+                                <div class="option-icon">📅</div>
+                                <div class="option-text">
+                                    <div class="option-title">2–3 years</div>
+                                    <div class="option-description">Medium-term usage</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="3_plus_years">
+                                <div class="option-icon">📅</div>
+                                <div class="option-text">
+                                    <div class="option-title">3+ years</div>
+                                    <div class="option-description">Long-term investment</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button id="prevStep11-tablet" class="nav-btn">Previous</button>
+                            <button id="nextStep11-tablet" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+                    <!-- Step 12: Tradeoffs (multi-select, max 2) -->
+                    <div id="step12-tablet" class="question-container">
+                        <div class="question">Which compromises are acceptable?</div>
+                        <div class="question-subtitle">If it helps fit the budget, what trade-offs would you be okay with?</div>
+                        <div class="selection-limit">Select up to 2 options</div>
+                        <div class="multi-select-options">
+                            <div class="multi-select-option" data-value="lower_storage">Lower storage</div>
+                            <div class="multi-select-option" data-value="lower_display_quality">Lower display quality</div>
+                            <div class="multi-select-option" data-value="limited_stylus_support">Limited stylus support</div>
+                            <div class="multi-select-option" data-value="older_os">Older OS version</div>
+                            <div class="multi-select-option" data-value="mid_level_performance">Mid-level performance</div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button id="prevStep12-tablet" class="nav-btn">Previous</button>
+                            <button id="nextStep12-tablet" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+                    <!-- Step 13: Alternatives (multi-select, max 2) -->
+                    <div id="step13-tablet" class="question-container">
+                        <div class="question">Would you be okay with:</div>
+                        <div class="question-subtitle">These alternatives might offer great value — open to exploring?</div>
+                        <div class="selection-limit">Select up to 2 options</div>
+                        <div class="multi-select-options">
+                            <div class="multi-select-option" data-value="previous_gen">Previous-generation model</div>
+                            <div class="multi-select-option" data-value="budget_brand">Budget brand with strong reviews</div>
+                            <div class="multi-select-option" data-value="open_box">Open-box or refurbished tablet</div>
+                            <div class="multi-select-option" data-value="expand_with_accessories">Expanding with accessories later</div>
+                            <div class="multi-select-option" data-value="last_year_better_specs">Last year's model with better specs</div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button id="prevStep13-tablet" class="nav-btn">Previous</button>
+                            <button id="nextStep13-tablet" class="nav-btn next-btn" disabled>Get Recommendations</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Laptop Questions -->
+                <div id="laptop-questions" style="display: none;">
+                    <!-- Step 3: Primary Use (multi-select, max 3) -->
+                    <div id="step3-laptop" class="question-container">
+                        <div class="question">What's your primary use for the laptop?</div>
+                        <div class="question-subtitle">What do you plan to conquer with your laptop?</div>
+                        <div class="selection-limit">Select up to 3 options</div>
+                        <div class="multi-select-options">
+                            <div class="multi-select-option" data-value="web_browsing">Web browsing / Casual tasks</div>
+                            <div class="multi-select-option" data-value="coding">Coding & software development</div>
+                            <div class="multi-select-option" data-value="ml_ai">Machine learning / AI research</div>
+                            <div class="multi-select-option" data-value="graphic_design">Graphic design / UI/UX</div>
+                            <div class="multi-select-option" data-value="video_editing">Video editing / Content creation</div>
+                            <div class="multi-select-option" data-value="rendering_cad">3D rendering / CAD modeling</div>
+                            <div class="multi-select-option" data-value="office_productivity">Office productivity (e.g., Excel, docs)</div>
+                            <div class="multi-select-option" data-value="gaming">Gaming (AAA or eSports)</div>
+                            <div class="multi-select-option" data-value="education">Education / Online classes</div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button id="prevStep3-laptop" class="nav-btn">Previous</button>
+                            <button id="nextStep3-laptop" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+                    <!-- Step 4: Role (single choice) -->
+                    <div id="step4-laptop" class="question-container">
+                        <div class="question">What's your role?</div>
+                        <div class="question-subtitle">Who are you in this digital world?</div>
+                        <div class="options">
+                            <div class="option" data-value="student">
+                                <div class="option-icon">🎓</div>
+                                <div class="option-text">
+                                    <div class="option-title">Student</div>
+                                    <div class="option-description">Currently studying or in education</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="ml_ai_practitioner">
+                                <div class="option-icon">🤖</div>
+                                <div class="option-text">
+                                    <div class="option-title">ML/AI practitioner or researcher</div>
+                                    <div class="option-description">Machine learning and AI work</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="developer">
+                                <div class="option-icon">💻</div>
+                                <div class="option-text">
+                                    <div class="option-title">Developer / Engineer</div>
+                                    <div class="option-description">Software development and coding</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="creative_artist">
+                                <div class="option-icon">🎨</div>
+                                <div class="option-text">
+                                    <div class="option-title">Creative artist (design/video/audio)</div>
+                                    <div class="option-description">Creative and media work</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="business_user">
+                                <div class="option-icon">💼</div>
+                                <div class="option-text">
+                                    <div class="option-title">Business user</div>
+                                    <div class="option-description">Business and office work</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="casual_user">
+                                <div class="option-icon">🏠</div>
+                                <div class="option-text">
+                                    <div class="option-title">Casual user</div>
+                                    <div class="option-description">Personal and home use</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button id="prevStep4-laptop" class="nav-btn">Previous</button>
+                            <button id="nextStep4-laptop" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+                    <!-- Step 5: Performance Expectation (single choice) -->
+                    <div id="step5-laptop" class="question-container">
+                        <div class="question">What kind of performance do you expect?</div>
+                        <div class="question-subtitle">Heavy hitter or light-duty? What's your performance need?</div>
+                        <div class="options">
+                            <div class="option" data-value="light">
+                                <div class="option-icon">⚡</div>
+                                <div class="option-text">
+                                    <div class="option-title">Light (browsing, docs, video calls)</div>
+                                    <div class="option-description">Basic tasks and productivity</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="moderate">
+                                <div class="option-icon">⚡</div>
+                                <div class="option-text">
+                                    <div class="option-title">Moderate (coding, multitasking)</div>
+                                    <div class="option-description">Development and multitasking</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="heavy">
+                                <div class="option-icon">⚡</div>
+                                <div class="option-text">
+                                    <div class="option-title">Heavy (ML, gaming, editing, rendering)</div>
+                                    <div class="option-description">Intensive workloads</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button id="prevStep5-laptop" class="nav-btn">Previous</button>
+                            <button id="nextStep5-laptop" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+                    <!-- Step 6: Dedicated GPU (single choice) -->
+                    <div id="step6-laptop" class="question-container">
+                        <div class="question">Is a dedicated GPU essential?</div>
+                        <div class="question-subtitle">Does your work demand graphics muscle?</div>
+                        <div class="options">
+                            <div class="option" data-value="nvidia_only">
+                                <div class="option-icon">🎮</div>
+                                <div class="option-text">
+                                    <div class="option-title">Yes, NVIDIA GPU only (ML workloads like PyTorch, TensorFlow)</div>
+                                    <div class="option-description">Machine learning and AI work</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="any_gpu">
+                                <div class="option-icon">🎮</div>
+                                <div class="option-text">
+                                    <div class="option-title">Any GPU is fine (editing, gaming, etc.)</div>
+                                    <div class="option-description">Graphics work and gaming</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="integrated">
+                                <div class="option-icon">💻</div>
+                                <div class="option-text">
+                                    <div class="option-title">Integrated graphics is fine</div>
+                                    <div class="option-description">Basic graphics needs</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button id="prevStep6-laptop" class="nav-btn">Previous</button>
+                            <button id="nextStep6-laptop" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+                    <!-- Step 7: Preferred Screen Size (single choice) -->
+                    <div id="step7-laptop" class="question-container">
+                        <div class="question">Preferred screen size</div>
+                        <div class="question-subtitle">How big should your display be?</div>
+                        <div class="options">
+                            <div class="option" data-value="13_or_smaller">
+                                <div class="option-icon">💻</div>
+                                <div class="option-text">
+                                    <div class="option-title">13" or smaller (ultraportable)</div>
+                                    <div class="option-description">Maximum portability</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="14_15_6">
+                                <div class="option-icon">💻</div>
+                                <div class="option-text">
+                                    <div class="option-title">14–15.6" (balanced)</div>
+                                    <div class="option-description">Good balance of size and portability</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="16_or_larger">
+                                <div class="option-icon">💻</div>
+                                <div class="option-text">
+                                    <div class="option-title">16" or larger (desktop replacement)</div>
+                                    <div class="option-description">Maximum screen real estate</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button id="prevStep7-laptop" class="nav-btn">Previous</button>
+                            <button id="nextStep7-laptop" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+                    <!-- Step 8: Priorities (multi-select, max 3) -->
+                    <div id="step8-laptop" class="question-container">
+                        <div class="question">What do you prioritize most?</div>
+                        <div class="question-subtitle">What's absolutely essential for you in a laptop?</div>
+                        <div class="selection-limit">Select up to 3 options</div>
+                        <div class="multi-select-options">
+                            <div class="multi-select-option" data-value="battery_life">Battery life</div>
+                            <div class="multi-select-option" data-value="lightweight">Lightweight design</div>
+                            <div class="multi-select-option" data-value="color_accurate_display">Color-accurate display (sRGB, DCI-P3)</div>
+                            <div class="multi-select-option" data-value="smooth_visuals">Smooth visuals (120Hz+)</div>
+                            <div class="multi-select-option" data-value="top_tier_cpu">Top-tier CPU (i7/Ryzen 7 or higher)</div>
+                            <div class="multi-select-option" data-value="expandability">Expandability (RAM/SSD upgrades)</div>
+                            <div class="multi-select-option" data-value="low_fan_noise">Low fan noise</div>
+                            <div class="multi-select-option" data-value="thermal_efficiency">Thermally efficient design</div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button id="prevStep8-laptop" class="nav-btn">Previous</button>
+                            <button id="nextStep8-laptop" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+                    <!-- Step 9: Budget (single choice) -->
+                    <div id="step9-laptop" class="question-container">
+                        <div class="question">What's your budget?</div>
+                        <div class="question-subtitle">Where does your budget land for this laptop purchase?</div>
+                        <div class="options">
+                            <div class="option" data-value="under_40000">
+                                <div class="option-icon">💰</div>
+                                <div class="option-text">
+                                    <div class="option-title">Under ₹40,000</div>
+                                    <div class="option-description">Budget-friendly laptops</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="40000_60000">
+                                <div class="option-icon">💰</div>
+                                <div class="option-text">
+                                    <div class="option-title">₹40,000–₹60,000</div>
+                                    <div class="option-description">Mid-range laptops</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="60000_90000">
+                                <div class="option-icon">💰</div>
+                                <div class="option-text">
+                                    <div class="option-title">₹60,000–₹90,000</div>
+                                    <div class="option-description">Upper mid-range laptops</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="90000_120000">
+                                <div class="option-icon">💰</div>
+                                <div class="option-text">
+                                    <div class="option-title">₹90,000–₹1,20,000</div>
+                                    <div class="option-description">Premium laptops</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="120000_plus">
+                                <div class="option-icon">💰</div>
+                                <div class="option-text">
+                                    <div class="option-title">₹1,20,000+</div>
+                                    <div class="option-description">Ultra-premium laptops</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button id="prevStep9-laptop" class="nav-btn">Previous</button>
+                            <button id="nextStep9-laptop" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+                    <!-- Step 10: Usage Duration (single choice) -->
+                    <div id="step10-laptop" class="question-container">
+                        <div class="question">Planned usage duration</div>
+                        <div class="question-subtitle">How many years do you plan to use this laptop?</div>
+                        <div class="options">
+                            <div class="option" data-value="1_2_years">
+                                <div class="option-icon">📅</div>
+                                <div class="option-text">
+                                    <div class="option-title">1–2 years</div>
+                                    <div class="option-description">Short-term usage</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="2_4_years">
+                                <div class="option-icon">📅</div>
+                                <div class="option-text">
+                                    <div class="option-title">2–4 years</div>
+                                    <div class="option-description">Medium-term usage</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="4_plus_years">
+                                <div class="option-icon">📅</div>
+                                <div class="option-text">
+                                    <div class="option-title">4+ years</div>
+                                    <div class="option-description">Long-term investment</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button id="prevStep10-laptop" class="nav-btn">Previous</button>
+                            <button id="nextStep10-laptop" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+                    <!-- Step 11: OS (single choice) -->
+                    <div id="step11-laptop" class="question-container">
+                        <div class="question">Preferred operating system</div>
+                        <div class="question-subtitle">Any OS you're comfortable or stuck with?</div>
+                        <div class="options">
+                            <div class="option" data-value="windows">
+                                <div class="option-icon">🪟</div>
+                                <div class="option-text">
+                                    <div class="option-title">Windows</div>
+                                    <div class="option-description">Microsoft's operating system</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="macos">
+                                <div class="option-icon">🍎</div>
+                                <div class="option-text">
+                                    <div class="option-title">macOS</div>
+                                    <div class="option-description">Apple's operating system</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="linux">
+                                <div class="option-icon">🐧</div>
+                                <div class="option-text">
+                                    <div class="option-title">Linux</div>
+                                    <div class="option-description">Open-source operating system</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="doesnt_matter">
+                                <div class="option-icon">🔄</div>
+                                <div class="option-text">
+                                    <div class="option-title">Doesn't matter</div>
+                                    <div class="option-description">Flexible with operating system choice</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button id="prevStep11-laptop" class="nav-btn">Previous</button>
+                            <button id="nextStep11-laptop" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+                    <!-- Step 12: I/O and Connectivity (multi-select, max 3) -->
+                    <div id="step12-laptop" class="question-container">
+                        <div class="question">Which I/O and connectivity features do you need?</div>
+                        <div class="question-subtitle">Which ports/features are must-haves for your setup?</div>
+                        <div class="selection-limit">Select up to 3 options</div>
+                        <div class="multi-select-options">
+                            <div class="multi-select-option" data-value="wifi6">Wi-Fi 6 / 6E</div>
+                            <div class="multi-select-option" data-value="thunderbolt_usb_c">Thunderbolt or USB-C PD</div>
+                            <div class="multi-select-option" data-value="hdmi">HDMI / external monitor port</div>
+                            <div class="multi-select-option" data-value="sd_card">SD card reader</div>
+                            <div class="multi-select-option" data-value="ethernet">Ethernet port</div>
+                            <div class="multi-select-option" data-value="multiple_usb_a">Multiple USB-A ports</div>
+                            <div class="multi-select-option" data-value="fingerprint_face">Fingerprint / Face unlock</div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button id="prevStep12-laptop" class="nav-btn">Previous</button>
+                            <button id="nextStep12-laptop" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+                    <!-- Step 13: Flexibility & Tradeoffs (multi-select, max 2) -->
+                    <div id="step13-laptop" class="question-container">
+                        <div class="question">Are you open to the following?</div>
+                        <div class="question-subtitle">If it saves money or offers better specs, are these tradeoffs okay?</div>
+                        <div class="selection-limit">Select up to 2 options</div>
+                        <div class="multi-select-options">
+                            <div class="multi-select-option" data-value="last_gen_high_end">Buying last-gen high-end model</div>
+                            <div class="multi-select-option" data-value="open_box_refurbished">Open-box / refurbished with warranty</div>
+                            <div class="multi-select-option" data-value="expand_with_accessories">Expanding with accessories later</div>
+                            <div class="multi-select-option" data-value="lesser_known_brands">Choosing lesser-known brands with strong reviews</div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button id="prevStep13-laptop" class="nav-btn">Previous</button>
+                            <button id="nextStep13-laptop" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+                    <!-- Step 14: Ecosystem Preferences (multi-select, max 2) -->
+                    <div id="step14-laptop" class="question-container">
+                        <div class="question">Are you already part of any device ecosystem?</div>
+                        <div class="question-subtitle">Already loyal to a brand? Let me know!</div>
+                        <div class="selection-limit">Select up to 2 options</div>
+                        <div class="multi-select-options">
+                            <div class="multi-select-option" data-value="apple">Apple (iPhone, iPad, AirPods, etc.)</div>
+                            <div class="multi-select-option" data-value="samsung">Samsung Galaxy (Smartphone, Watch, Tab, Buds)</div>
+                            <div class="multi-select-option" data-value="xiaomi">Xiaomi / Redmi / POCO devices</div>
+                            <div class="multi-select-option" data-value="realme">Realme ecosystem</div>
+                            <div class="multi-select-option" data-value="motorola">Motorola ecosystem</div>
+                            <div class="multi-select-option" data-value="windows_android">Windows + Android mix</div>
+                            <div class="multi-select-option" data-value="none">None in particular</div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button id="prevStep14-laptop" class="nav-btn">Previous</button>
+                            <button id="nextStep14-laptop" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+                    <!-- Step 15: Cross-device Continuity (single choice) -->
+                    <div id="step15-laptop" class="question-container">
+                        <div class="question">How important is cross-device continuity to you?</div>
+                        <div class="question-subtitle">Do you want all your devices to work in sync — or nah?</div>
+                        <div class="options">
+                            <div class="option" data-value="very_important">
+                                <div class="option-icon">🔗</div>
+                                <div class="option-text">
+                                    <div class="option-title">Very important (e.g., copy/paste across devices, easy file sync, app continuity)</div>
+                                    <div class="option-description">Seamless ecosystem integration</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="somewhat_important">
+                                <div class="option-icon">🔗</div>
+                                <div class="option-text">
+                                    <div class="option-title">Somewhat important (nice to have)</div>
+                                    <div class="option-description">Basic integration features</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="not_important">
+                                <div class="option-icon">🔗</div>
+                                <div class="option-text">
+                                    <div class="option-title">Not important</div>
+                                    <div class="option-description">Standalone device usage</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button id="prevStep15-laptop" class="nav-btn">Previous</button>
+                            <button id="nextStep15-laptop" class="nav-btn next-btn" disabled>Next</button>
+                        </div>
+                    </div>
+                    <!-- Step 16: Ecosystem Tradeoffs (multi-select, max 2) -->
+                    <div id="step16-laptop" class="question-container">
+                        <div class="question">Are you open to:</div>
+                        <div class="question-subtitle">What are you okay experimenting with if it means better value?</div>
+                        <div class="selection-limit">Select up to 2 options</div>
+                        <div class="multi-select-options">
+                            <div class="multi-select-option" data-value="switch_ecosystem">Switching ecosystem for better laptop value</div>
+                            <div class="multi-select-option" data-value="sacrifice_ecosystem">Sacrificing ecosystem features for raw specs</div>
+                            <div class="multi-select-option" data-value="pay_more_for_continuity">Paying slightly more for same-brand continuity</div>
+                            <div class="multi-select-option" data-value="buy_within_brand">Buying within brand even if specs are slightly behind</div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button id="prevStep16-laptop" class="nav-btn">Previous</button>
+                            <button id="nextStep16-laptop" class="nav-btn next-btn" disabled>Get Recommendations</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading Overlay -->
+            <div id="loadingOverlay" class="loading-overlay">
+                <div class="loading-content">
+                    <div class="spinner"></div>
+                    <h3>Analyzing your preferences...</h3>
+                    <p>Finding the perfect device for you!</p>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsSection" class="results-section">
+                <!-- Results will be populated here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-treasure-chest"></i> TechTrove</h3>
+                <p>Your trusted guide to tech knowledge</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../home.html">Home</a></li>
+                    <li><a href="recommendation.html">Recommendation</a></li>
+                    <li><a href="../features/features.html">Tech Explained</a></li>
+                    <li><a href="../technews/technews.html">Tech News</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 TechTrove. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="recommendation.js"></script>
+    <script src="test-validation.js"></script>
 </body>
-</html>
+</html> 

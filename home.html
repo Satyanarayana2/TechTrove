@@ -9,10 +9,10 @@
     @import url('https://fonts.googleapis.com/css2?family=Annie+Use+Your+Telescope&display=swap');
 
     :root {
-      --font-primary: #4A90E2; /* Main headline font */
-      --font-secondary: #ffffff; /* Subheadline / subtext font */
-      --font-accent: #0086ff; /* Button links or hover color */
-      --font-highlight: #ff5e57; /* Optional for excitement words */
+      --font-primary: #244855; /* Dark teal for main headline */
+      --font-secondary: #FBE9D0; /* Warm beige for subheadline */
+      --font-accent: #E64833; /* Red for button links or hover */
+      --font-highlight: #874F41; /* Brown for excitement words */
     }
 
     * {
@@ -26,8 +26,8 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: #0d1117 url('background1 (2).jpg') center/cover no-repeat;
-      color: #e6e6e6;
+      background: #FBE9D0 url('background1 (2).jpg') center/cover no-repeat;
+      color: #244855;
       overflow: hidden;
       position: relative;
     }
@@ -38,12 +38,17 @@
       align-items: center;
       position: relative;
       cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .container:hover {
+      transform: scale(1.05);
     }
 
     .word {
       font-size: 4rem;
       font-weight: 800;
-      transition: transform 0.5s ease;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 2;
     }
 
@@ -55,7 +60,6 @@
       margin-left: 10px;
     }
 
-    
     .popup-img {
       display: none;
       position: absolute;
@@ -63,25 +67,29 @@
       height: 250px;
       object-fit: cover;
       border-radius: 12px;
-      /* box-shadow: 0 0 20px rgba(0,0,0,0.6); */
+      box-shadow: 0 8px 25px rgba(36, 72, 85, 0.3);
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%) scale(0.8);
       z-index: 1;
-      transition: opacity 0.5s ease;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0;
     }
 
     .container:hover .life {
-      transform: translateX(-45px);
+      transform: translateX(-45px) rotate(-5deg);
+      color: var(--font-accent);
     }
 
     .container:hover .two {
-      transform: translateX(205px);
+      transform: translateX(205px) rotate(5deg);
+      color: var(--font-accent);
     }
 
     .container:hover .popup-img {
       display: block;
       opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
     }
 
     .subtext {
@@ -89,13 +97,14 @@
       font-weight: SemiBold;
       margin-top: 2rem;
       font-size: 4rem;
-      transition: transform 0.5s ease, opacity 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 2;
     }
 
     .container:hover ~ .subtext {
-      transform: translateY(100px);
+      transform: translateY(100px) scale(0.9);
       opacity: 0.5;
+      color: var(--font-highlight);
     }
   </style>
 </head>
