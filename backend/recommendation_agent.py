@@ -11,7 +11,7 @@ app = Flask(__name__)
 CORS(app, origins=["http://127.0.0.1:5500"], supports_credentials=True)
 
 # --- Perplexity API Configuration ---
-YOUR_API_KEY = os.environ.get("PERPLEXITY_API_KEY", "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")
+YOUR_API_KEY = os.environ.get("PERPLEXITY_API_KEY", "6teXXoWwI8alGXuR3autPJ9MtIo")
 
 client = OpenAI(
     api_key=YOUR_API_KEY,
