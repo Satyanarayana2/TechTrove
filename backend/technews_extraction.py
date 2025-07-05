@@ -6,7 +6,7 @@ import json
 import time
 
 app = Flask(__name__)
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "AIzaSyCoaN9s78YX_ZZINAcdOTQTxEdlwthnqdU")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "AIzaSZZINAcdOTQTxEdlwthnqdU")
 
 genai.configure(api_key=GEMINI_API_KEY)
 model = genai.GenerativeModel('gemini-1.5-flash-latest')
